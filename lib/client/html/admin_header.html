@@ -27,11 +27,15 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{#if currentUser}}
+                            <span>{{currentUser.fullName}}<i class="caret"></i></span>
+                            {{else}}
                             <span>Admin<i class="caret"></i></span>
+                            {{/if}}
                         </a>
                         <ul class="dropdown-menu">
                             <li class="">
-                            <a href="{{pathFor 'adminDashboardUsersEdit' _id=currentUser._id}}">
+                            <a href="{{pathFor "adminDashboardUsersProfile" _id=currentUser._id}}">
                                 Your profile
                                 </a>
                             </li>

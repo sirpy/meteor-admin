@@ -1,8 +1,8 @@
 Package.describe({
-  name: "yogiben:admin",
+  name: "sirpy:admin",
   summary: "A complete admin dashboard solution",
-  version: "1.2.3",
-  git: "https://github.com/yogiben/meteor-admin"
+  version: "1.0.0",
+  git: "https://github.com/sirpy/meteor-admin"
 });
 
 Package.on_use(function(api){
@@ -51,6 +51,7 @@ Package.on_use(function(api){
     'lib/client/html/admin_header.html',
     'lib/client/css/admin-custom.less',
     'lib/client/js/admin_layout.js',
+    'lib/client/js/app.js',
     'lib/client/js/helpers.coffee',
     'lib/client/js/templates.coffee',
     'lib/client/js/events.coffee',

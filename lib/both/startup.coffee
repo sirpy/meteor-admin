@@ -39,16 +39,16 @@ adminCreateTables = (collections) ->
 			showDelColumn: true
 		}
 
-		columns = _.map collection.tableColumns, (column) ->
-			if column.template
-				createdCell = (node, cellData, rowData) ->
-					$(node).html ''
-					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData})
-
-			data: column.name
-			title: column.label
-			createdCell: createdCell
-
+		# columns = _.map collection.columns, (column) ->
+		# 	if column.template
+		# 		createdCell = (node, cellData, rowData) ->
+		# 			$(node).html ''
+		# 			Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData})
+		#
+		# 	data: column.data
+		# 	title: column.title
+		# 	createdCell: createdCell
+		columns = collection.columns
 		if columns.length == 0
 			columns = defaultColumns()
 
@@ -206,5 +206,5 @@ Meteor.startup ->
 				width: '40px'
 			}
 			{ data: 'createdAt', title: 'Joined' }
-		], adminEditDelButtons
+		], adminEditDelButtons, AdminConfig?.usersExtraButtons
 		dom: adminTablesDom
