@@ -32,6 +32,11 @@ AdminDashboard =
 
 		@sidebarItems.push item
 
+	removeSidebarItem: (title) ->
+		existing = _.findWhere @sidebarItems, {'title':title}
+		if existing
+			@sidebarItems = _.without(@sidebarItems, existing)
+
 	extendSidebarItem: (title, urls) ->
 		if _.isObject(urls) then urls = [urls]
 
@@ -50,7 +55,7 @@ AdminDashboard =
 
 
 AdminDashboard.schemas.newUser = new SimpleSchema
-	email: 
+	email:
 		type: String
 		label: "Email address"
 	chooseOwnPassword:
