@@ -65,6 +65,7 @@ adminCreateTables = (collections) ->
 			columns: columns
 			extraFields: collection.extraFields
 			dom: adminTablesDom
+			order: collection.order
 
 adminCreateRoutes = (collections) ->
 	_.each collections, adminCreateRouteView
