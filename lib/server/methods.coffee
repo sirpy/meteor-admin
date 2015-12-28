@@ -1,22 +1,23 @@
 Meteor.methods
 	adminInsertDoc: (doc,collection)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			this.unblock()
 			result = adminCollectionObject(collection).insert doc
-				
+
 			return result
 
 	adminUpdateDoc: (modifier,collection,_id)->
+		console.log("updating doc",AdminDashboard.isAdmin this.userId);
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			this.unblock()
 			result = adminCollectionObject(collection).update {_id:_id},modifier
 			return result
 
 	adminRemoveDoc: (collection,_id)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			if collection == 'Users'
 				Meteor.users.remove {_id:_id}
 			else
@@ -26,7 +27,7 @@ Meteor.methods
 
 	adminNewUser: (doc) ->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			emails = doc.email.split(',')
 			_.each emails, (email)->
 				user = {}
@@ -48,20 +49,20 @@ Meteor.methods
 
 	adminUpdateUser: (modifier,_id)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			this.unblock()
 			result = Meteor.users.update {_id:_id}, modifier
 			return result
 
 	adminSendResetPasswordEmail: (doc)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			console.log 'Changing password for user ' + doc._id
 			Accounts.sendResetPasswordEmail(doc._id)
 
 	adminChangePassword: (doc)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			console.log 'Changing password for user ' + doc._id
 			Accounts.setPassword(doc._id, doc.password)
 			label: 'Email user their new password'
@@ -69,7 +70,7 @@ Meteor.methods
 	adminCheckAdmin: ->
 		check arguments, [Match.Any]
 		user = Meteor.users.findOne(_id:this.userId)
-		if this.userId and !Roles.userIsInRole(this.userId, ['admin']) and (user.emails.length > 0)
+		if this.userId and !AdminDashboard.isAdmin(this.userId) and (user.emails.length > 0)
 			email = user.emails[0].address
 			if typeof Meteor.settings.adminEmails != 'undefined'
 				adminEmails = Meteor.settings.adminEmails
@@ -87,12 +88,12 @@ Meteor.methods
 
 	adminAddUserToRole: (_id,role)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			Roles.addUsersToRoles _id, role, Roles.GLOBAL_GROUP
 
 	adminRemoveUserToRole: (_id,role)->
 		check arguments, [Match.Any]
-		if Roles.userIsInRole this.userId, ['admin']
+		if AdminDashboard.isAdmin this.userId
 			Roles.removeUsersFromRoles _id, role, Roles.GLOBAL_GROUP
 
 	adminSetCollectionSort: (collection, _sort) ->

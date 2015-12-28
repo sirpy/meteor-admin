@@ -2,7 +2,7 @@ Template.registerHelper('AdminTables', AdminTables);
 
 adminCollections = ->
 	collections = {}
-
+	
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 		collections = AdminConfig.collections
 
@@ -72,6 +72,9 @@ UI.registerHelper 'adminGetSkin', ->
 
 UI.registerHelper 'adminIsUserInRole', (_id,role)->
 	Roles.userIsInRole _id, role
+
+UI.registerHelper 'adminIsUserAdmin', (_id)->
+	AdminDashboard.isAdmin _id
 
 UI.registerHelper 'adminGetUsers', ->
 	Meteor.users

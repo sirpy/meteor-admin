@@ -1,7 +1,10 @@
+
 Meteor.publishComposite 'adminCollectionDoc', (collection, id) ->
 	check collection, String
 	check id, Match.OneOf(String, Mongo.ObjectID)
-	if Roles.userIsInRole this.userId, ['admin']
+	# in the future allow collection read/write per user or other roles
+	# collectionRoles = AdminConfig.collections?[collection]?.roles or adminRoles
+	if AdminDashboard.isAdmin this.userId
 		find: ->
 			adminCollectionObject(collection).find(id)
 		children: AdminConfig?.collections?[collection]?.children or []
@@ -9,7 +12,7 @@ Meteor.publishComposite 'adminCollectionDoc', (collection, id) ->
 		@ready()
 
 Meteor.publish 'adminUsers', ->
-	if Roles.userIsInRole @userId, ['admin']
+	if AdminDashboard.isAdmin this.userId
 		Meteor.users.find()
 	else
 		@ready()
@@ -18,6 +21,9 @@ Meteor.publish 'adminUser', ->
 	Meteor.users.find @userId
 
 Meteor.publish 'adminCollectionsCount', ->
+	if not AdminDashboard.isAdmin this.userId
+		@ready()
+		return;
 	handles = []
 	self = @
 
