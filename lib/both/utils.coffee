@@ -1,3 +1,4 @@
+@adminRoles = AdminConfig?.adminRoles or ['admin']
 @adminCollectionObject = (collection) ->
 	if typeof AdminConfig.collections[collection] != 'undefined' and typeof AdminConfig.collections[collection].collectionObject != 'undefined'
 		AdminConfig.collections[collection].collectionObject
@@ -23,7 +24,7 @@
 		else
 			return ref
 	return obj
-	
+
 @parseID = (id) ->
 	if typeof id == 'string'
 		if(id.indexOf("ObjectID") > -1)

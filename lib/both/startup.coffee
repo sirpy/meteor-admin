@@ -65,6 +65,7 @@ adminCreateTables = (collections) ->
 			columns: columns
 			extraFields: collection.extraFields
 			dom: adminTablesDom
+			order: collection.order
 
 adminCreateRoutes = (collections) ->
 	_.each collections, adminCreateRouteView
@@ -160,6 +161,10 @@ adminPublishTables = (collections) ->
 			children: collection.children
 
 Meteor.startup ->
+	# if Meteor.isServer && not AdminDashboard.isAdmin this.userId then return undefined
+	#
+	# if Meteor.isClient && not AdminDashboard.isAdmin Meteor.userId then return undefined
+
 	adminCreateTables AdminConfig?.collections
 	adminCreateRoutes AdminConfig?.collections
 	adminPublishTables AdminConfig?.collections if Meteor.isServer

@@ -7,14 +7,25 @@ AdminDashboard =
 	alertFailure: (message)->
 		Session.set 'adminError', message
 
-	checkAdmin: ->
-		if not Roles.userIsInRole Meteor.userId(), ['admin']
+	isAdmin: (userId)->
+		console.log("isAdmin",userId,adminRoles);
+		return Roles.userIsInRole userId, adminRoles
+
+  adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit']
+	adminControllerCheckAdmin: (currentRoute) ->
+		console.log("AdminDashboard adminControllerCheckAdmin:","for route:",currentRoute.getName(),AdminConfig);
+		if Meteor.userId() && not currentRoute.getName().indexOf('adminDashboard') && not AdminConfig?.routePermissions
+			return
+		if Meteor.userId() && AdminConfig?.routePermissions?(currentRoute.getName())
+			return
+		if not AdminDashboard.isAdmin Meteor.userId()
 			Meteor.call 'adminCheckAdmin'
 			if (typeof AdminConfig?.nonAdminRedirectRoute == "string")
 			  Router.go AdminConfig.nonAdminRedirectRoute
+			else Router.go "/"
 		if typeof @.next == 'function'
 			@next()
-	adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit']
+
 	collectionLabel: (collection)->
 		if collection == 'Users'
 			'Users'
