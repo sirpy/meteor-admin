@@ -53,6 +53,7 @@ Package.on_use(function(api){
     'lib/client/js/admin_layout.js',
     'lib/client/js/app.js',
     'lib/client/js/helpers.coffee',
+    'lib/client/js/he.coffee',
     'lib/client/js/templates.coffee',
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
