@@ -4,7 +4,7 @@
             {{#if AdminConfig.name}}
             {{AdminConfig.name}}
             {{else}}
-            Admin
+            {{t9n "adminHeader.admin"}}
             {{/if}}
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
@@ -19,9 +19,9 @@
                 <ul class="nav navbar-nav">
                     <li>
                         {{#if AdminConfig.dashboard.homeUrl}}
-                        <a href="{{AdminConfig.dashboard.homeUrl}}">Home</a>
+                        <a href="{{AdminConfig.dashboard.homeUrl}}">{{t9n "adminHeader.home"}}</a>
                         {{else}}
-                        <a href="/">Home</a>
+                        <a href="/">{{t9n "adminHeader.home"}}</a>
                         {{/if}}
 
                     </li>
@@ -30,17 +30,17 @@
                             {{#if currentUser}}
                             <span>{{currentUser.fullName}}<i class="caret"></i></span>
                             {{else}}
-                            <span>Admin<i class="caret"></i></span>
+                            <span>{{t9n "adminHeader.admin"}}<i class="caret"></i></span>
                             {{/if}}
                         </a>
                         <ul class="dropdown-menu">
                             <li class="">
                             <a href="{{pathFor "usersProfile" _id=currentUser._id}}">
-                                Your profile
+                                {{t9n "adminHeader.yourProfile"}}
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#" class="btn-sign-out">Sign out
+                                <a href="#" class="btn-sign-out">{{t9n "signOut"}}
                                 </a>
                             </li>
                         </ul>

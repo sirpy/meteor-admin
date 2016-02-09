@@ -2,9 +2,48 @@
 he =
     Ok: "כן"
     "Not Ok": "לא"
-    navbar:{},
+    SelectionHistory: "הסטוריית בחירות"
+    Users: "משתמשים"
+    adminHeader:{
+        admin: "מנהל"
+        home: "דף הבית"
+        yourProfile: "הפרופיל שלי"
+    },
+    adminLayout:{
+        dashboard:"דף הבית"
+        New:"חדש"
+        edit:"עריכה"
+        AdminDeleteModal:{
+            title:"אשר מחיקה"
+            message:"האם אתה בטוח ברצונך למחוק?"
+            close:"סגור"
+            confirm:"מחק"
+        },
+        notAdmin:"עליך להיות מנהל כדי להציג דף זה"
+    },
+    adminSidebar:{
+        dashboard:"דף הבית"
+        New:"חדש"
+        viewAll:"הצג הכל"
+    },
     profile:{
         memberSince: "חבר מאז:"
-        paid: "שולם:"
+        paid: "שולמו דמי חבר:"
+        zirPail:"ציר פעיל"
+        zirLoPail:"ציר לא פעיל"
+        rakazPail:"רכז פעיל"
+        rakazLoPail:"רכז לא פעיל"
+        rakazOrZirNivhar:"רכז/ציר נבחר"
+        statusRakazOrZir:"סטטוס רכז/ציר"
+        selectionHistory:"היסטורית בחירת בעלי תפקידים"
+        rakazSupporters:"ממני רכז"
+        zirSupporters:"ממני ציר"
+        zirRakazSupporters:"ממני הרכזים של הציר"
+        rakazCancelers:"ביטלו בחירתי כרכז"
+        zirCancelers:"ביטלו בחירתי כציר"
+        selectedRakaz:"רכז נבחר:"
+        noSelectedRakaz:"לא נבחר רכז"
+        selectedZir:"ציר נבחר:"
+        noSelectedZir:"לא נבחר ציר"
     }
 T9n.map "he", he
